@@ -5,5 +5,6 @@
 {
   imports = [
     ./nvim
+    ./tmux.nix
   ];
 }

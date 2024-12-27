@@ -50,6 +50,7 @@
   ];
 
   ncfg.nvim.enable = true;
+  ncfg.tmux.enable = true;
 
   qt = {
     enable = true;
@@ -90,10 +91,6 @@
     enable = true;
     enableBashIntegration = true;
     nix-direnv.enable = true;
-  };
-
-  programs.tmux = {
-    enable = true;
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

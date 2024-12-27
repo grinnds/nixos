@@ -6,14 +6,17 @@ vim.opt.relativenumber = true
 vim.opt.showmode = false
 
 vim.opt.clipboard = "unnamedplus"
-
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
 vim.opt.mouse = "a"
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 vim.keymap.set("n", "<leader>x", ":.lua<CR>")
 vim.keymap.set("v", "<leader>x", ":lua<CR>")
+
+vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<CR>")
 
 vim.keymap.set("n", "<c-h>", "<c-w><c-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<c-l>", "<c-w><c-l>", { desc = "Move focus to the right window" })

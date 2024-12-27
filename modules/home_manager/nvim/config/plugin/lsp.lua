@@ -10,6 +10,12 @@ require("lspconfig").nixd.setup({
 			formatting = {
 				command = { "nixfmt" },
 			},
+			-- TODO: make it work
+			-- options = {
+			-- 	nixos = {
+			-- 		expr = '(builtins.getFlake ("/etc/nixos/")).nixosConfigurations.hope.options',
+			-- 	},
+			-- },
 		},
 	},
 })

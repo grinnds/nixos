@@ -72,6 +72,10 @@
             config = toLuaFile ./config/plugin/mini.lua;
           }
           vim-sleuth
+          {
+            plugin = gitsigns-nvim;
+            config = toLuaFile ./config/plugin/gitsigns.lua;
+          }
 
           # file management
           {

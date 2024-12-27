@@ -1,19 +1,16 @@
 {
-  config,
-  lib,
   pkgs,
   inputs,
   ...
 }:
 
 {
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
   ];
 
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -22,7 +19,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
+  networking.hostName = "hope";
   networking.networkmanager.enable = true;
 
   # Required for TUN DNS
@@ -73,7 +70,6 @@
     nix-output-monitor
     vim
   ];
-  environment.variables.EDITOR = "nvim";
 
   programs.nh = {
     enable = true;

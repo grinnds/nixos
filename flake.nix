@@ -13,13 +13,18 @@
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixpkgs,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.hope = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./configuration.nix
+          ./hosts/hope/configuration.nix
         ];
       };
+
+      homeManagerModules.default = ./modules/home_manager;
     };
 }

@@ -1,11 +1,14 @@
 {
-  config,
-  pkgs,
   inputs,
+  pkgs,
   ...
 }:
 
 {
+  imports = [
+    inputs.self.outputs.homeManagerModules.default
+  ];
+
   home.username = "baris";
   home.homeDirectory = "/home/baris";
   home.keyboard = null;
@@ -45,6 +48,8 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  ncfg.nvim.enable = true;
 
   qt = {
     enable = true;
@@ -87,107 +92,6 @@
     nix-direnv.enable = true;
   };
 
-  programs.neovim =
-    let
-      toLua = str: "lua << EOF\n${str}\nEOF\n";
-      toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-    in
-    {
-      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-
-      enable = true;
-
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-
-      extraPackages = with pkgs; [
-        xclip
-        wl-clipboard
-
-        ripgrep
-        fd
-
-        nixd
-        nixfmt-rfc-style
-
-        lua-language-server
-        stylua
-      ];
-
-      plugins = with pkgs.vimPlugins; [
-        # vimPlugins config is placed before extra config
-        # leader key is required before any plugin is initialized
-        # thus creating empty plugin with config setting leader key
-        # this plugin should be at the top
-        # https://github.com/nix-community/home-manager/issues/4609
-        {
-          plugin = pkgs.stdenv.mkDerivation {
-            name = "empty";
-            src = ./nvim/empty;
-            installPhase = "cp -r $src $out";
-            dontUnpack = true;
-          };
-          config = toLua ''vim.g.mapleader = ' ' vim.g.maplocalleader = ' ' '';
-        }
-
-        # theming
-        {
-          plugin = tokyonight-nvim;
-          config = "colorscheme tokyonight-night";
-        }
-
-        # quality of life
-        {
-          plugin = mini-nvim;
-          config = toLuaFile ./nvim/plugin/mini.lua;
-        }
-        vim-sleuth
-
-        # file management
-        {
-          plugin = oil-nvim;
-          config = toLuaFile ./nvim/plugin/oil.lua;
-        }
-
-        plenary-nvim
-        nvim-web-devicons
-        telescope-fzf-native-nvim
-        {
-          plugin = telescope-nvim;
-          config = toLuaFile ./nvim/plugin/telescope.lua;
-        }
-
-        # code quality
-        {
-          plugin = (
-            nvim-treesitter.withPlugins (p: [
-              p.tree-sitter-nix
-              p.tree-sitter-vim
-              p.tree-sitter-vimdoc
-              p.tree-sitter-lua
-            ])
-          );
-          config = toLuaFile ./nvim/plugin/treesitter.lua;
-        }
-        lazydev-nvim
-        {
-          plugin = nvim-lspconfig;
-          config = toLuaFile ./nvim/plugin/lsp.lua;
-        }
-        {
-          plugin = conform-nvim;
-          config = toLuaFile ./nvim/plugin/conform.lua;
-        }
-        {
-          plugin = blink-cmp;
-          config = toLuaFile ./nvim/plugin/cmp.lua;
-        }
-      ];
-
-      extraLuaConfig = ''${builtins.readFile ./nvim/options.lua}'';
-    };
-
   programs.tmux = {
     enable = true;
   };
@@ -223,10 +127,7 @@
   #
   #  /etc/profiles/per-user/baris/etc/profile.d/hm-session-vars.sh
   #
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -1,3 +1,5 @@
+local actions = require("telescope.actions")
+
 require("telescope").setup({
 	extensions = {
 		fzf = {
@@ -5,6 +7,18 @@ require("telescope").setup({
 			override_generic_sorter = true,
 			override_file_sorter = true,
 			case_mode = "smart_case",
+		},
+	},
+	pickers = {
+		buffers = {
+			mappings = {
+				n = {
+					["<c-d>"] = actions.delete_buffer,
+				},
+				i = {
+					["<c-d>"] = actions.delete_buffer,
+				},
+			},
 		},
 	},
 })

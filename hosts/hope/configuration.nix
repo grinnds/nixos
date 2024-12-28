@@ -50,7 +50,9 @@
 
   services.libinput.enable = true;
 
+  programs.zsh.enable = true;
   users.users.baris = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = [
       "wheel"

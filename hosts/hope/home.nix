@@ -50,17 +50,14 @@
   ];
 
   ncfg.nvim.enable = true;
+  ncfg.fzf.enable = true;
   ncfg.tmux.enable = true;
+  ncfg.zsh.enable = true;
 
   qt = {
     enable = true;
     platformTheme.name = "kde";
     style.name = "breeze-dark";
-  };
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
   };
 
   programs.bat = {

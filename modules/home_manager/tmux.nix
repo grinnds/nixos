@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  inputs,
   ...
 }:
 
@@ -26,6 +25,8 @@
         tokyo-night-tmux
         yank
       ];
+
+      extraConfig = ''set -g renumber-windows on'';
     };
   };
 }

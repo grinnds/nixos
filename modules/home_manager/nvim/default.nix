@@ -62,8 +62,8 @@
 
           # theming
           {
-            plugin = tokyonight-nvim;
-            config = "colorscheme tokyonight-night";
+            plugin = catppuccin-nvim;
+            config = "colorscheme catppuccin-mocha";
           }
 
           # quality of life

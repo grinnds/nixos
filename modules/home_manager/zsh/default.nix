@@ -47,6 +47,17 @@
           src = ./config;
           file = "p10k.zsh";
         }
+        # Should be before zsh-syntax-highlighting
+        {
+          name = "zsh-syntax-highlighting-catppuccin";
+          src = fetchFromGitHub {
+            owner = "catppuccin";
+            repo = "zsh-syntax-highlighting";
+            rev = "7926c3d";
+            hash = "sha256-l6tztApzYpQ2/CiKuLBf8vI2imM6vPJuFdNDSEi7T/o=";
+          };
+          file = "themes/catppuccin_mocha-zsh-syntax-highlighting.zsh";
+        }
         {
           name = zsh-syntax-highlighting.pname;
           src = zsh-syntax-highlighting.src;

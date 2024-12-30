@@ -11,6 +11,11 @@
   };
 
   config = lib.mkIf config.ncfg.tmux.enable {
+    # required for tmux-yank
+    home.packages = with pkgs; [
+      wl-clipboard
+    ];
+
     programs.tmux = {
       enable = true;
 
@@ -22,11 +27,20 @@
 
       sensibleOnTop = true;
       plugins = with pkgs.tmuxPlugins; [
-        tokyo-night-tmux
+        # TODO: Probably not working
+        resurrect
+        continuum
         yank
+        catppuccin
       ];
 
-      extraConfig = ''set -g renumber-windows on'';
+      # TODO: Move to config file
+      extraConfig = ''
+        set -g renumber-windows on
+        set -g set-clipboard on
+
+        set -g @catppuccin_flavor "mocha"
+      '';
     };
   };
 }

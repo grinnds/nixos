@@ -37,6 +37,8 @@
           ripgrep
           fd
 
+          gcc
+
           nixd
           nixfmt-rfc-style
 

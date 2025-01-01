@@ -1,6 +1,7 @@
 local capabilites = require("blink.cmp").get_lsp_capabilities()
+local lspconfig = require("lspconfig")
 
-require("lspconfig").nixd.setup({
+lspconfig.nixd.setup({
 	capabalities = capabilites,
 	settings = {
 		nixd = {
@@ -25,7 +26,7 @@ require("lazydev").setup({
 		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 	},
 })
-require("lspconfig").lua_ls.setup({
+lspconfig.lua_ls.setup({
 	capabalities = capabilites,
 	settings = {
 		Lua = {
@@ -36,3 +37,5 @@ require("lspconfig").lua_ls.setup({
 		},
 	},
 })
+
+lspconfig.gopls.setup({})

@@ -37,13 +37,18 @@
           ripgrep
           fd
 
-          gcc
-
+          # lsp
           nixd
+          lua-language-server
+          gopls
+
+          # formatters
+          stylua
           nixfmt-rfc-style
 
-          lua-language-server
-          stylua
+          # tools
+          gcc
+          go
         ];
 
         plugins = with pkgs.vimPlugins; [
@@ -101,6 +106,7 @@
                 p.tree-sitter-vim
                 p.tree-sitter-vimdoc
                 p.tree-sitter-lua
+                p.tree-sitter-go
               ])
             );
             config = toLuaFile ./config/plugin/treesitter.lua;

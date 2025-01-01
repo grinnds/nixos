@@ -166,6 +166,10 @@
           bind-key k select-pane -U
           bind-key l select-pane -R
 
+          bind-key -T copy-mode-vi v send-keys -X begin-selection
+          bind-key -T copy-mode-vi V send-keys -X select-line
+          bind-key -T copy-mode-vi C-v run-shell "tmux send-keys -X rectangle-toggle; tmux send-keys -X begin-selection"
+
           set -g renumber-windows on
 
           set -ag terminal-overrides ",xterm-256color:RGB"

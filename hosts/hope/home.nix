@@ -73,7 +73,7 @@
       s = "status";
     };
     userName = "grinnds";
-    userEmail = "grinnds@example.com";
+    userEmail = "40234162+grinnds@users.noreply.github.com";
     extraConfig = {
       push.autoSetupRemote = true;
       init.defaultBranch = "main";

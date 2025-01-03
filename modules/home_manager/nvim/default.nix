@@ -70,7 +70,7 @@
           # theming
           {
             plugin = catppuccin-nvim;
-            config = "colorscheme catppuccin-mocha";
+            config = toLuaFile ./config/plugin/catppuccin.lua;
           }
 
           # quality of life
@@ -82,6 +82,10 @@
           {
             plugin = gitsigns-nvim;
             config = toLuaFile ./config/plugin/gitsigns.lua;
+          }
+          {
+            plugin = vim-tmux-navigator;
+            config = toLuaFile ./config/plugin/tmux.lua;
           }
 
           # file management

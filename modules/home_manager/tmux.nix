@@ -35,10 +35,43 @@
         sensibleOnTop = true;
         plugins = with pkgs.tmuxPlugins; [
           yank
+          vim-tmux-navigator
           {
             plugin = catppuccin;
             extraConfig = ''
               set -g @catppuccin_flavor "mocha"
+
+              set -g @catppuccin_window_left_separator ""
+              set -g @catppuccin_window_right_separator " "
+              set -g @catppuccin_window_middle_separator " █"
+              set -g @catppuccin_window_number_position "right"
+
+              set -g @catppuccin_window_default_fill "number"
+              set -g @catppuccin_window_default_text "#W"
+
+              set -g @catppuccin_window_current_fill "number"
+              set -g @catppuccin_window_current_text "#W"
+
+              set -g @catppuccin_status_modules_right "session"
+              set -g @catppuccin_status_left_separator  " "
+              set -g @catppuccin_status_right_separator ""
+              set -g @catppuccin_status_right_separator_inverse "no"
+              set -g @catppuccin_status_fill "icon"
+              set -g @catppuccin_status_connect_separator "no"
+
+              set -g @catppuccin_directory_text "#{pane_current_path}"
+
+              set -g @catppuccin_date_time_text "%Y-%m-%d %H:%M:%S"
+
+              set -g @catppuccin_window_status_enable "yes"
+
+              set -g @catppuccin_icon_window_last "󰖰"
+              set -g @catppuccin_icon_window_current "󰖯"
+              set -g @catppuccin_icon_window_zoom "󰁌"
+              set -g @catppuccin_icon_window_mark "󰃀"
+              set -g @catppuccin_icon_window_silent "󰂛"
+              set -g @catppuccin_icon_window_activity "󰖲"
+              set -g @catppuccin_icon_window_bell "󰂞"
 
               # Taken from https://github.com/catppuccin/tmux/discussions/317#discussioncomment-11064512
               # Colors not working
@@ -131,7 +164,7 @@
             plugin = continuum;
             extraConfig = ''
               set -g @continuum-restore on
-              set -g @continuum-save-interval "10"
+              set -g @continuum-save-interval "1"
             '';
           }
         ];
@@ -161,14 +194,20 @@
           # In order to avoid conflicts between the plugins and this option it should
           # not be enabled.
 
-          bind-key h select-pane -L
-          bind-key j select-pane -D
-          bind-key k select-pane -U
-          bind-key l select-pane -R
+          bind-key -r h resize-pane -L 5
+          bind-key -r j resize-pane -D 5
+          bind-key -r k resize-pane -U 5
+          bind-key -r l resize-pane -R 5
+
+          # A more consistent(with i3wm) and ergonomic(qwerty) to focus on a pane
+          unbind z
+          bind-key f resize-pane -Z
 
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi V send-keys -X select-line
           bind-key -T copy-mode-vi C-v run-shell "tmux send-keys -X rectangle-toggle; tmux send-keys -X begin-selection"
+
+          bind-key -T copy-mode-vi y send-keys -X copy-slection
 
           set -g renumber-windows on
 

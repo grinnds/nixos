@@ -1,5 +1,3 @@
-vim.g.have_nerd_font = true
-
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -13,8 +11,8 @@ vim.opt.mouse = "a"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.keymap.set("n", "<leader>x", ":.lua<CR>")
-vim.keymap.set("v", "<leader>x", ":lua<CR>")
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
 
 vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<CR>")
 

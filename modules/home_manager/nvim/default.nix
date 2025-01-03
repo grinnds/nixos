@@ -45,10 +45,10 @@
           # formatters
           stylua
           nixfmt-rfc-style
+          gotools
 
           # tools
           gcc
-          go
         ];
 
         plugins = with pkgs.vimPlugins; [
@@ -64,7 +64,12 @@
               installPhase = "cp -r $src $out";
               dontUnpack = true;
             };
-            config = toLua ''vim.g.mapleader = ' ' vim.g.maplocalleader = ' ' '';
+            config = toLua ''
+              vim.g.mapleader = ' ' 
+              vim.g.maplocalleader = ' ' 
+
+              vim.g.have_nerd_font = true
+            '';
           }
 
           # theming

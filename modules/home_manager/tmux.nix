@@ -207,7 +207,7 @@
           bind-key -T copy-mode-vi V send-keys -X select-line
           bind-key -T copy-mode-vi C-v run-shell "tmux send-keys -X rectangle-toggle; tmux send-keys -X begin-selection"
 
-          bind-key -T copy-mode-vi y send-keys -X copy-slection
+          bind-key -T copy-mode-vi y send-keys -X copy-selection
 
           set -g renumber-windows on
 

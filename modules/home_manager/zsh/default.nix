@@ -30,6 +30,12 @@
         bindkey "^n" history-search-forward
         bindkey "^p" history-search-backward
 
+        # https://unix.stackexchange.com/questions/722697/how-to-stop-ctrlleft-right-arrow-from-erasing-symbols-in-vi-mode-in-zsh
+        bindkey -M vicmd "^[[1;5C" emacs-forward-word
+        bindkey -M vicmd "^[[1;5D" emacs-backward-word
+        bindkey -M viins "^[[1;5C" emacs-forward-word
+        bindkey -M viins "^[[1;5D" emacs-backward-word
+
         zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
         zstyle ":completion:*" list-colors "$\{(s.:.)LS_COLORS}"
         zstyle ":completion:*" menu no 

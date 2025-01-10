@@ -61,9 +61,9 @@
     style.name = "breeze-dark";
   };
 
-  programs.bat = {
-    enable = true;
-  };
+  programs.lazygit.enable = true;
+
+  programs.bat.enable = true;
 
   programs.git = {
     enable = true;

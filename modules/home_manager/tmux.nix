@@ -35,7 +35,6 @@
         sensibleOnTop = true;
         plugins = with pkgs.tmuxPlugins; [
           yank
-          vim-tmux-navigator
           {
             plugin = catppuccin;
             extraConfig = ''
@@ -73,80 +72,18 @@
               set -g @catppuccin_icon_window_activity "󰖲"
               set -g @catppuccin_icon_window_bell "󰂞"
 
-              # Taken from https://github.com/catppuccin/tmux/discussions/317#discussioncomment-11064512
-              # Colors not working
-              # set -g @catppuccin_status_background "none"
-              # set -g @catppuccin_window_status_style "none"
-              # set -g @catppuccin_pane_status_enabled "off"
-              # set -g @catppuccin_pane_border_status "off"
+              # This one is good https://github.com/catppuccin/tmux/discussions/317#discussioncomment-11064512
+              # But I can't male it work, colors not working
+              # Current look is fine
             '';
           }
-          {
-            plugin = online-status;
-            extraConfig = ''
-              # Hack for updating status line after catppuccin
-
-              # # Configure Online
-              # set -g @online_icon "ok"
-              # set -g @offline_icon "nok"
-
-              # # status left look and feel
-              # set -g status-left-length 100
-              # set -g status-left ""
-              # set -ga status-left "#{?client_prefix,#{#[bg=#{@thm_red},fg=#{@thm_bg},bold]  #S },#{#[bg=#{@thm_bg},fg=#{@thm_green}]  #S }}"
-              # set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]│"
-              # set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_maroon}]  #{pane_current_command} "
-              # set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]│"
-              # set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_blue}]  #{=/-32/...:#{s|$USER|~|:#{b:pane_current_path}}} "
-              # set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]#{?window_zoomed_flag,│,}"
-              # set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_yellow}]#{?window_zoomed_flag,  zoom ,}"
-
-              # # status right look and feel
-              # set -g status-right-length 100
-              # set -g status-right ""
-              # set -ga status-right "#{?#{e|>=:10,#{battery_percentage}},#{#[bg=#{@thm_red},fg=#{@thm_bg}]},#{#[bg=#{@thm_bg},fg=#{@thm_pink}]}} #{battery_icon} #{battery_percentage} "
-              # set -ga status-right "#[bg=#{@thm_bg},fg=#{@thm_overlay_0}, none]│"
-              # set -ga status-right "#[bg=#{@thm_bg}]#{?#{==:#{online_status},ok},#[fg=#{@thm_mauve}] 󰖩 on ,#[fg=#{@thm_red},bold]#[reverse] 󰖪 off }"
-              # set -ga status-right "#[bg=#{@thm_bg},fg=#{@thm_overlay_0}, none]│"
-              # set -ga status-right "#[bg=#{@thm_bg},fg=#{@thm_blue}] 󰭦 %Y-%m-%d 󰅐 %H:%M "
-
-              # # Configure Tmux
-              # set -g status-position top
-              # set -g status-style "bg=#{@thm_bg}"
-              # set -g status-justify "absolute-centre"
-
-              # # pane border look and feel
-              # setw -g pane-border-status top
-              # setw -g pane-border-format ""
-              # setw -g pane-active-border-style "bg=#{@thm_bg},fg=#{@thm_overlay_0}"
-              # setw -g pane-border-style "bg=#{@thm_bg},fg=#{@thm_surface_0}"
-              # setw -g pane-border-lines single
-
-              # # window look and feel
-              # set -wg automatic-rename on
-              # set -g automatic-rename-format "Window"
-
-              # set -g window-status-format " #I#{?#{!=:#{window_name},Window},: #W,} "
-              # set -g window-status-style "bg=#{@thm_bg},fg=#{@thm_rosewater}"
-              # set -g window-status-last-style "bg=#{@thm_bg},fg=#{@thm_peach}"
-              # set -g window-status-activity-style "bg=#{@thm_red},fg=#{@thm_bg}"
-              # set -g window-status-bell-style "bg=#{@thm_red},fg=#{@thm_bg},bold"
-              # set -gF window-status-separator "#[bg=#{@thm_bg},fg=#{@thm_overlay_0}]│"
-
-              # set -g window-status-current-format " #I#{?#{!=:#{window_name},Window},: #W,} "
-              # set -g window-status-current-style "bg=#{@thm_peach},fg=#{@thm_bg},bold"
-
-              # run /nix/store/aiva6d5ig81xmb6127xd2mciprp7sxh6-tmuxplugin-catppuccin-unstable-2024-05-15/share/tmux-plugins/catppuccin/catppuccin.tmux
-            '';
-          }
-          battery
           # This plugin needs to be loaded before continuum or else continuum, will
           # not work.
           {
             plugin = resurrect;
             extraConfig = ''
               set -g @resurrect-strategy-nvim "session"
-              set -g @resurrect-capture-pane-contents off
+              set -g @resurrect-capture-pane-contents on
 
               # This three lines are specific to NixOS and they are intended
               # to edit the tmux_resurrect_* files that are created when tmux
@@ -194,10 +131,10 @@
           # In order to avoid conflicts between the plugins and this option it should
           # not be enabled.
 
-          bind-key -r h resize-pane -L 5
-          bind-key -r j resize-pane -D 5
-          bind-key -r k resize-pane -U 5
-          bind-key -r l resize-pane -R 5
+          bind-key -r H resize-pane -L 5
+          bind-key -r J resize-pane -D 5
+          bind-key -r K resize-pane -U 5
+          bind-key -r L resize-pane -R 5
 
           # A more consistent(with i3wm) and ergonomic(qwerty) to focus on a pane
           unbind z
@@ -209,9 +146,32 @@
 
           bind-key -T copy-mode-vi y send-keys -X copy-selection
 
+          set-option -g status-position top
+
           set -g renumber-windows on
 
           set -ag terminal-overrides ",xterm-256color:RGB"
+
+          # Use w for sessions
+          unbind s
+
+          unbind %
+          unbind '"'
+          bind s split-window -h -c "#{pane_current_path}"
+          bind v split-window -v -c "#{pane_current_path}"
+
+          # Disabling wrapping will disable switching zoomed, because zoomed pane considered left,top,etc.
+          is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+              | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?|fzf)(diff)?$'"
+          bind-key -n 'C-h' if-shell "$is_vim" { send-keys C-h } { if-shell -F '#{pane_at_left}'   {} { select-pane -LZ } }
+          bind-key -n 'C-j' if-shell "$is_vim" { send-keys C-j } { if-shell -F '#{pane_at_bottom}' {} { select-pane -DZ } }
+          bind-key -n 'C-k' if-shell "$is_vim" { send-keys C-k } { if-shell -F '#{pane_at_top}'    {} { select-pane -UZ } }
+          bind-key -n 'C-l' if-shell "$is_vim" { send-keys C-l } { if-shell -F '#{pane_at_right}'  {} { select-pane -RZ } }
+
+          bind-key -T copy-mode-vi 'C-h' if-shell -F '#{pane_at_left}'   {} { select-pane -LZ }
+          bind-key -T copy-mode-vi 'C-j' if-shell -F '#{pane_at_bottom}' {} { select-pane -DZ }
+          bind-key -T copy-mode-vi 'C-k' if-shell -F '#{pane_at_top}'    {} { select-pane -UZ }
+          bind-key -T copy-mode-vi 'C-l' if-shell -F '#{pane_at_right}'  {} { select-pane -RZ }
         '';
       };
   };

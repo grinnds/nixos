@@ -1,8 +1,5 @@
 require("oil").setup({
 	delete_to_trash = true,
-	buf_options = {
-		buflisted = true,
-	},
 	view_options = {
 		show_hidden = true,
 	},

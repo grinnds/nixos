@@ -53,6 +53,7 @@
   ncfg.fzf.enable = true;
   ncfg.tmux.enable = true;
   ncfg.wezterm.enable = true;
+  ncfg.zoxide.enable = true;
   ncfg.zsh.enable = true;
 
   qt = {

@@ -1,9 +1,10 @@
 {
   imports = [
+    ./fzf
     ./nvim
-    ./fzf.nix
-    ./tmux.nix
+    ./tmux
     ./wezterm
+    ./zoxide
     ./zsh
   ];
 }

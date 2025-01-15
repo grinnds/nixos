@@ -11,8 +11,8 @@
   };
 
   config = lib.mkIf config.ncfg.tmux.enable {
-    # required for tmux-yank
     home.packages = with pkgs; [
+      # required for tmux-yank
       wl-clipboard
     ];
 
@@ -131,10 +131,10 @@
           # In order to avoid conflicts between the plugins and this option it should
           # not be enabled.
 
-          bind-key -r H resize-pane -L 5
-          bind-key -r J resize-pane -D 5
-          bind-key -r K resize-pane -U 5
-          bind-key -r L resize-pane -R 5
+          bind-key -r M-h resize-pane -L 5
+          bind-key -r M-j resize-pane -D 5
+          bind-key -r M-k resize-pane -U 5
+          bind-key -r M-l resize-pane -R 5
 
           # A more consistent(with i3wm) and ergonomic(qwerty) to focus on a pane
           unbind z

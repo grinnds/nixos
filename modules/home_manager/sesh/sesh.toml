@@ -1,0 +1,18 @@
+import = []
+
+[[session]]
+name = "home "
+path = "~"
+
+[[session]]
+name = "code "
+path = "~/code"
+
+[[session]]
+name = "nixos 󱄅"
+path = "~/nixos"
+
+[[session]]
+name = "downloads "
+path = "~/Downloads"
+

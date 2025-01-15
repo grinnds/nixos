@@ -52,6 +52,7 @@
   ncfg.fzf.enable = true;
   ncfg.lsd.enable = true;
   ncfg.nvim.enable = true;
+  ncfg.sesh.enable = true;
   ncfg.tmux.enable = true;
   ncfg.wezterm.enable = true;
   ncfg.zoxide.enable = true;

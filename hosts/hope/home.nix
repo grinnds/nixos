@@ -49,8 +49,9 @@
     # '')
   ];
 
-  ncfg.nvim.enable = true;
   ncfg.fzf.enable = true;
+  ncfg.lsd.enable = true;
+  ncfg.nvim.enable = true;
   ncfg.tmux.enable = true;
   ncfg.wezterm.enable = true;
   ncfg.zoxide.enable = true;

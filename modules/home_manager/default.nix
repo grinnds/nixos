@@ -1,6 +1,7 @@
 {
   imports = [
     ./fzf
+    ./lsd
     ./nvim
     ./tmux
     ./wezterm

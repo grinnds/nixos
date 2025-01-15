@@ -6,5 +6,6 @@ require("blink.cmp").setup({
 		nerd_font_variant = "mono",
 	},
 
-	signature = { enabled = true },
+	-- use Ctrl+S
+	-- signature = { enabled = true },
 })

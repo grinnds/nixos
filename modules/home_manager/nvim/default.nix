@@ -133,6 +133,11 @@
             plugin = blink-cmp;
             config = toLuaFile ./config/plugin/cmp.lua;
           }
+          {
+            plugin = luasnip;
+            config = toLuaFile ./config/plugin/luasnip.lua;
+          }
+          blink-emoji-nvim
         ];
 
         extraLuaConfig = ''${builtins.readFile ./config/options.lua}'';

@@ -157,8 +157,9 @@
 
           unbind %
           unbind '"'
-          bind s split-window -h -c "#{pane_current_path}"
-          bind v split-window -v -c "#{pane_current_path}"
+          # Splits are different in tmux from vim
+          bind s split-window -v -c "#{pane_current_path}"
+          bind v split-window -h -c "#{pane_current_path}"
 
           # Disabling wrapping will disable switching zoomed, because zoomed pane considered left,top,etc.
           is_vim="ps -o state= -o comm= -t '#{pane_tty}' \

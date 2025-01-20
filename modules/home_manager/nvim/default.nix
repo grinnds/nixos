@@ -46,9 +46,11 @@
           stylua
           nixfmt-rfc-style
           gotools
+          golines
 
           # tools
           gcc
+          go
         ];
 
         plugins = with pkgs.vimPlugins; [

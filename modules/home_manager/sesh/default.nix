@@ -32,7 +32,7 @@
         bind-key x kill-pane # skip "kill-pane 1? (y/n)" prompt
         set -g detach-on-destroy off  # don't exit from tmux when closing a session
 
-        bind-key "T" run-shell "sesh connect \"$(
+        bind-key "K" run-shell "sesh connect \"$(
           ${pkgs.sesh}/bin/sesh list --icons | fzf-tmux -p 80%,70% \
             --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
             --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
@@ -41,13 +41,10 @@
             --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
             --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
             --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+            --bind 'ctrl-f:change-prompt(🔎  )+reload(${pkgs.fd}/bin/fd -H -d 2 -t d . ~)' \
             --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
             --preview-window 'right:55%' \
             --preview 'sesh preview {}'
-        )\""
-
-        bind-key "K" display-popup -E -w 40% "sesh connect \"$(
-          ${pkgs.sesh}/bin/sesh list -i | ${pkgs.gum}/bin/gum filter --limit 1 --no-sort --fuzzy --placeholder 'Pick a sesh' --height 50 --prompt='⚡'
         )\""
 
         bind -N "last-session (via sesh) " L run-shell "sesh last"

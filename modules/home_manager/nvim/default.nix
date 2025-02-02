@@ -41,12 +41,14 @@
           nixd
           lua-language-server
           gopls
+          marksman
 
           # formatters
           stylua
           nixfmt-rfc-style
           gotools
           golines
+          nodePackages.prettier
 
           # tools
           gcc
@@ -94,6 +96,10 @@
             plugin = vim-tmux-navigator;
             config = toLuaFile ./config/plugin/tmux.lua;
           }
+          {
+            plugin = render-markdown-nvim;
+            config = toLua "require('render-markdown').setup({})";
+          }
 
           # file management
           {
@@ -118,6 +124,8 @@
                 p.tree-sitter-vimdoc
                 p.tree-sitter-lua
                 p.tree-sitter-go
+                p.tree-sitter-markdown
+                p.tree-sitter-markdown-inline
               ])
             );
             config = toLuaFile ./config/plugin/treesitter.lua;

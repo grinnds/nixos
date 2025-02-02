@@ -34,7 +34,7 @@ require("blink.cmp").setup({
 	},
 
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer", "lazydev", "emoji" },
+		default = { "lsp", "path", "snippets", "buffer", "lazydev", "emoji", "markdown" },
 		providers = {
 			lsp = {
 				name = "LSP",
@@ -102,6 +102,11 @@ require("blink.cmp").setup({
 				module = "blink-emoji",
 				name = "Emoji",
 				score_offset = 15,
+			},
+			markdown = {
+				name = "RenderMarkdown",
+				module = "render-markdown.integ.blink",
+				fallbacks = { "lsp" },
 			},
 		},
 		-- command line completion, thanks to dpetka2001 in reddit

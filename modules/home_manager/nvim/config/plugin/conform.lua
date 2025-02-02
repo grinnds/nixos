@@ -15,10 +15,16 @@ require("conform").setup({
 			lsp_format = lsp_format_opt,
 		}
 	end,
+	formatters = {
+		prettier = {
+			prepend_args = { "--prose-wrap", "always" },
+		},
+	},
 	formatters_by_ft = {
 		lua = { "stylua" },
 		nix = { "nixfmt" },
 		go = { "goimports", "gofmt", "golines" },
+		markdown = { "prettier" },
 		-- -- Conform will run multiple formatters sequentially
 		-- python = { "isort", "black" },
 		-- -- You can customize some of the format options for the filetype (:help conform.format)

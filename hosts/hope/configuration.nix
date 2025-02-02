@@ -30,7 +30,7 @@
   services.xserver = {
     enable = true;
     xkb.layout = "us,ru";
-    xkb.options = "grp:win_space_toggle";
+    xkb.options = "grp:win_space_toggle,caps:ctrl_modifier";
   };
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;

@@ -146,6 +146,11 @@ require("blink.cmp").setup({
 				border = "single",
 			},
 		},
+		accept = {
+			auto_brackets = {
+				enabled = false,
+			},
+		},
 		-- don't use
 		ghost_text = { enabled = false },
 	},

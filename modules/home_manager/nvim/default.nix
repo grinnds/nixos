@@ -42,6 +42,7 @@
           lua-language-server
           gopls
           marksman
+          pyright
 
           # formatters
           stylua
@@ -49,6 +50,7 @@
           gotools
           golines
           nodePackages.prettier
+          ruff
 
           # tools
           gcc
@@ -126,6 +128,7 @@
                 p.tree-sitter-go
                 p.tree-sitter-markdown
                 p.tree-sitter-markdown-inline
+                p.tree-sitter-python
               ])
             );
             config = toLuaFile ./config/plugin/treesitter.lua;

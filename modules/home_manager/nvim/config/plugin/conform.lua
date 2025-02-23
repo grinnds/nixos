@@ -24,6 +24,7 @@ require("conform").setup({
 		lua = { "stylua" },
 		nix = { "nixfmt" },
 		go = { "goimports", "gofmt", "golines" },
+		python = { "ruff_format", "ruff_organize_imports" },
 		markdown = { "prettier" },
 		-- -- Conform will run multiple formatters sequentially
 		-- python = { "isort", "black" },

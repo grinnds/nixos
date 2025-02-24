@@ -12,7 +12,8 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
+-- TODO: add whichkey or don't use this
+-- vim.opt.timeoutlen = 300
 
 vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<CR>")
 

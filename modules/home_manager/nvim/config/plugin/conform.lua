@@ -26,6 +26,7 @@ require("conform").setup({
 		go = { "goimports", "gofmt", "golines" },
 		python = { "ruff_format", "ruff_organize_imports" },
 		markdown = { "prettier" },
+		json = { "jq" },
 		-- -- Conform will run multiple formatters sequentially
 		-- python = { "isort", "black" },
 		-- -- You can customize some of the format options for the filetype (:help conform.format)

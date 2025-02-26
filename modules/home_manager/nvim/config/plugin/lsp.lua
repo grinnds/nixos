@@ -9,6 +9,7 @@ local on_attach = function(client, bufnr)
 	local unmap = function(keys, mode)
 		mode = mode or "n"
 		pcall(vim.keymap.del, mode, keys)
+		-- Old code, testing new one
 		-- vim.keymap.set(mode, keys, "<nop>")
 	end
 
@@ -126,6 +127,11 @@ lspconfig.pyright.setup({
 })
 
 lspconfig.ruff.setup({
+	on_attach = on_attach,
+	capabilites = capabilites,
+})
+
+lspconfig.jsonls.setup({
 	on_attach = on_attach,
 	capabilites = capabilites,
 })

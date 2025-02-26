@@ -43,6 +43,7 @@
           gopls
           marksman
           pyright
+          vscode-langservers-extracted # jsonls
 
           # formatters
           stylua
@@ -51,6 +52,7 @@
           golines
           nodePackages.prettier
           ruff
+          jq
 
           # tools
           gcc
@@ -129,6 +131,7 @@
                 p.tree-sitter-markdown
                 p.tree-sitter-markdown-inline
                 p.tree-sitter-python
+                p.tree-sitter-json
               ])
             );
             config = toLuaFile ./config/plugin/treesitter.lua;

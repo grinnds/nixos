@@ -20,6 +20,9 @@
       let
         toLua = str: "lua << EOF\n${str}\nEOF\n";
         toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+        python = pkgs.python313.withPackages (p: [
+          p.debugpy
+        ]);
       in
       {
         package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
@@ -53,6 +56,10 @@
           nodePackages.prettier
           ruff
           jq
+
+          # debuggers
+          delve
+          python
 
           # tools
           gcc
@@ -117,6 +124,19 @@
           {
             plugin = telescope-nvim;
             config = toLuaFile ./config/plugin/telescope.lua;
+          }
+
+          # debug
+          {
+            plugin = nvim-dap;
+            config = toLuaFile ./config/plugin/debug.lua;
+          }
+          nvim-dap-ui
+          nvim-nio
+          nvim-dap-go
+          {
+            plugin = nvim-dap-python;
+            config = toLua ''require("dap-python").setup("${python}/bin/python")'';
           }
 
           # code quality

@@ -16,6 +16,7 @@ vim.opt.updatetime = 250
 -- vim.opt.timeoutlen = 300
 
 vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 vim.keymap.set("n", "<c-h>", "<c-w><c-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<c-l>", "<c-w><c-l>", { desc = "Move focus to the right window" })

@@ -49,20 +49,26 @@
     # '')
   ];
 
+  services.gnome-keyring.enable = true;
+
+  stylix.targets = {
+    waybar.enable = false;
+    rofi.enable = false;
+    hyprland.enable = false;
+    hyprlock.enable = false;
+    ghostty.enable = false;
+  };
+
   ncfg.fzf.enable = true;
+  ncfg.hyprland.enable = true;
   ncfg.lsd.enable = true;
   ncfg.nvim.enable = true;
+  ncfg.rofi.enable = true;
   ncfg.sesh.enable = true;
   ncfg.tmux.enable = true;
   ncfg.wezterm.enable = true;
   ncfg.zoxide.enable = true;
   ncfg.zsh.enable = true;
-
-  qt = {
-    enable = true;
-    platformTheme.name = "kde";
-    style.name = "breeze-dark";
-  };
 
   programs.lazygit.enable = true;
 
@@ -88,9 +94,12 @@
     enable = true;
   };
 
+  programs.mise = {
+    enable = true;
+  };
+
   programs.direnv = {
     enable = true;
-    enableBashIntegration = true;
     nix-direnv.enable = true;
   };
 

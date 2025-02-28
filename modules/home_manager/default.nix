@@ -8,6 +8,7 @@
     ./sesh
     ./tmux
     ./wezterm
+    ./wlogout
     ./zoxide
     ./zsh
   ];

@@ -10,6 +10,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ./drivers.nix
     inputs.home-manager.nixosModules.default
     inputs.stylix.nixosModules.stylix
   ];
@@ -43,54 +44,7 @@ in
       ];
     };
   };
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      vaapiVdpau
-      libvdpau
-      libvdpau-va-gl
-      nvidia-vaapi-driver
-      vdpauinfo
-      libva
-      libva-utils
-    ];
-  };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  hardware.nvidia = {
-    # Modesetting is required.
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    powerManagement.enable = false;
-
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    #dynamicBoost.enable = true; # Dynamic Boost
-
-    nvidiaPersistenced = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of
-    # supported GPUs is at:
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-    # Only available from driver 515.43.04+
-    # Currently alpha-quality/buggy, so false is currently the recommended setting.
-    open = false;
-
-    # Enable the Nvidia settings menu,
-    # accessible via `nvidia-settings`.
-
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-  };
   # TODO: remove or not
   programs.thunar = {
     enable = true;
@@ -104,9 +58,29 @@ in
     enable = true;
 
     image = ./wallpappers/hololive.jpg;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    base16Scheme = {
+      base00 = "282936";
+      base01 = "3a3c4e";
+      base02 = "4d4f68";
+      base03 = "626483";
+      base04 = "62d6e8";
+      base05 = "e9e9f4";
+      base06 = "f1f2f8";
+      base07 = "f7f7fb";
+      base08 = "ea51b2";
+      base09 = "b45bcf";
+      base0A = "00f769";
+      base0B = "ebff87";
+      base0C = "a1efe4";
+      base0D = "62d6e8";
+      base0E = "b45bcf";
+      base0F = "00f769";
+    };
     polarity = "dark";
-    opacity.terminal = 0.95;
+    opacity = {
+      applications = 0.95;
+      terminal = 0.80;
+    };
     cursor = {
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;

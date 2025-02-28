@@ -53,8 +53,9 @@ in
         "$modifier,8,workspace,8"
         "$modifier,9,workspace,9"
         "$modifier,0,workspace,10"
-        "$modifier SHIFT,SPACE,movetoworkspace,special"
-        "$modifier,SPACE,togglespecialworkspace"
+        # musor
+        # "$modifier SHIFT,SPACE,movetoworkspace,special"
+        # "$modifier,SPACE,togglespecialworkspace"
         "$modifier SHIFT,1,movetoworkspace,1"
         "$modifier SHIFT,2,movetoworkspace,2"
         "$modifier SHIFT,3,movetoworkspace,3"

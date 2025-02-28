@@ -13,6 +13,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = [
+      (import ./rofi-launcher.nix { inherit pkgs; })
+    ];
+
     programs.rofi = {
       enable = true;
       package = pkgs.rofi-wayland;

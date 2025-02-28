@@ -56,7 +56,7 @@
     rofi.enable = false;
     hyprland.enable = false;
     hyprlock.enable = false;
-    ghostty.enable = false;
+    neovim.enable = false;
   };
 
   ncfg.fzf.enable = true;
@@ -67,6 +67,7 @@
   ncfg.sesh.enable = true;
   ncfg.tmux.enable = true;
   ncfg.wezterm.enable = true;
+  ncfg.wlogout.enable = true;
   ncfg.zoxide.enable = true;
   ncfg.zsh.enable = true;
 

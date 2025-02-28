@@ -5,6 +5,7 @@
   ...
 }:
 let
+  username = "baris";
   cfg = config.ncfg.hyprland;
   keyboardLayout = "us,ru";
 in
@@ -21,7 +22,6 @@ in
         exec-once = [
           "dbus-update-activation-environment --systemd --all"
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
-          "${pkgs.kanshi}/bin/kanshi"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           "${pkgs.pyprland}/bin/pypr"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
@@ -33,7 +33,6 @@ in
             "grp:win_space_toggle"
             "caps:ctrl_modifier"
           ];
-          numlock_by_default = true;
           repeat_delay = 300;
           follow_mouse = 1;
           sensitivity = 0;
@@ -59,6 +58,7 @@ in
         misc = {
           layers_hog_keyboard_focus = true;
           initial_workspace_tracking = 0;
+          force_default_wallpaper = 0;
           mouse_move_enables_dpms = true;
           key_press_enables_dpms = false;
         };
@@ -106,7 +106,7 @@ in
 
         windowrulev2 = [
           "tag +file-manager, class:^([Tt]hunar|org.gnome.Nautilus|[Pp]cmanfm-qt)$"
-          "tag +terminal, class:^(Alacritty|kitty|kitty-dropterm)$"
+          "tag +terminal, class:^(wezterm)$"
           "tag +browser, class:^(Brave-browser(-beta|-dev|-unstable)?)$"
           "tag +browser, class:^([Ff]irefox|org.mozilla.firefox|[Ff]irefox-esr)$"
           "tag +browser, class:^([Gg]oogle-chrome(-beta|-dev|-unstable)?)$"

@@ -11,6 +11,7 @@ in
   imports = [
     ./config.nix
     ./keybindings.nix
+    ./hypridle.nix
     ./hyprlock.nix
     ./pyprland.nix
     ./waybar.nix

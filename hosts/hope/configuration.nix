@@ -11,6 +11,13 @@
     ./drivers.nix
     inputs.home-manager.nixosModules.default
   ];
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
 
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];

@@ -56,6 +56,9 @@
           nodePackages.prettier
           ruff
           jq
+          taplo
+          taplo
+          codespell
 
           # debuggers
           delve
@@ -152,9 +155,14 @@
                 p.tree-sitter-markdown-inline
                 p.tree-sitter-python
                 p.tree-sitter-json
+                p.tree-sitter-toml
               ])
             );
             config = toLuaFile ./config/plugin/treesitter.lua;
+          }
+          {
+            plugin = nvim-treesitter-context;
+            config = toLua ''require("treesitter-context").setup({multiline_threshold=1})'';
           }
           lazydev-nvim
           {

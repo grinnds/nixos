@@ -27,6 +27,8 @@ require("conform").setup({
 		python = { "ruff_format", "ruff_organize_imports" },
 		markdown = { "prettier" },
 		json = { "jq" },
+		toml = { "taplo" },
+		["*"] = { "codespell" },
 		-- -- Conform will run multiple formatters sequentially
 		-- python = { "isort", "black" },
 		-- -- You can customize some of the format options for the filetype (:help conform.format)

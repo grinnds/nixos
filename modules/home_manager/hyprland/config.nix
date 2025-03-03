@@ -5,9 +5,7 @@
   ...
 }:
 let
-  username = "baris";
   cfg = config.ncfg.hyprland;
-  keyboardLayout = "us,ru";
 in
 {
   config = lib.mkIf cfg.enable {
@@ -24,11 +22,13 @@ in
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           "${pkgs.pyprland}/bin/pypr"
+          "${pkgs.hyprpaper}/bin/hyprpaper"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
+          "${pkgs.swaynotificationcenter}/bin/swaync"
         ];
 
         input = {
-          kb_layout = "${keyboardLayout}";
+          kb_layout = "us,ru";
           kb_options = "grp:win_space_toggle,caps:ctrl_modifier";
           repeat_delay = 300;
           follow_mouse = 1;

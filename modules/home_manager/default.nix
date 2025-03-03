@@ -7,8 +7,8 @@
     ./rofi
     ./sesh
     ./tmux
+    ./wallpapers
     ./wezterm
-    ./wlogout
     ./zoxide
     ./zsh
   ];

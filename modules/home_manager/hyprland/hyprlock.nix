@@ -5,7 +5,6 @@
   ...
 }:
 let
-  username = "baris";
   cfg = config.ncfg.hyprland;
 in
 {
@@ -13,23 +12,23 @@ in
     programs.hyprlock = {
       enable = true;
       settings = {
+
         general = {
-          disable_loading_bar = true;
-          grace = 10;
-          hide_cursor = true;
-          no_fade_in = false;
+          ignore_empty_input = true;
         };
+
         background = [
           {
-            path = "/home/${username}/Pictures/Wallpapers/hololive.jpg";
+            path = "${config.home.homeDirectory}/Pictures/Wallpapers/hololive.jpg";
             blur_passes = 3;
             blur_size = 8;
           }
         ];
+
         image = [
           {
-            path = "/home/${username}/.config/face.jpg";
-            size = 150;
+            path = "/${config.home.homeDirectory}/.config/face.jpg";
+            size = 200;
             border_size = 4;
             border_color = "rgb(0C96F9)";
             rounding = -1; # Negative means circle
@@ -38,11 +37,12 @@ in
             valign = "center";
           }
         ];
+
         input-field = [
           {
+            monitor = "";
             size = "200, 50";
             position = "0, -80";
-            monitor = "";
             dots_center = true;
             fade_on_empty = false;
             font_color = "rgb(CFE6F4)";
@@ -51,6 +51,21 @@ in
             outline_thickness = 5;
             placeholder_text = "Password...";
             shadow_passes = 2;
+          }
+        ];
+
+        label = [
+          {
+            monitor = "";
+            text = "$USER";
+            color = "rgb(CFE6F4)";
+            font_size = 20;
+            font_family = "Noto Semibold";
+            position = "0, 0";
+            halign = "center";
+            valign = "center";
+            shadow_passes = 5;
+            shadow_size = 10;
           }
         ];
       };

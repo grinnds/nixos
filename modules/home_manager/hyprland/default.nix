@@ -13,8 +13,10 @@ in
     ./keybindings.nix
     ./hypridle.nix
     ./hyprlock.nix
+    ./hyprpaper.nix
     ./pyprland.nix
     ./waybar.nix
+    ./wlogout.nix
   ];
 
   options = {

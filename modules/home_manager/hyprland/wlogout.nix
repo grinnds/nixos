@@ -5,15 +5,10 @@
   ...
 }:
 let
-  cfg = config.ncfg.wlogout;
+  cfg = config.ncfg.hyprland;
 in
 {
-  options = {
-    ncfg.wlogout.enable = lib.mkEnableOption "Enable wlogout";
-  };
-
   config = lib.mkIf cfg.enable {
-
     programs.wlogout = {
       enable = true;
       layout = [
@@ -24,34 +19,34 @@ in
           keybind = "s";
         }
         {
-          "label" = "reboot";
-          "action" = "sleep 1; systemctl reboot";
-          "text" = "Reboot";
-          "keybind" = "r";
+          label = "reboot";
+          action = "sleep 1; systemctl reboot";
+          text = "Reboot";
+          keybind = "r";
         }
         {
-          "label" = "logout";
-          "action" = "sleep 1; hyprctl dispatch exit";
-          "text" = "Exit";
-          "keybind" = "e";
+          label = "logout";
+          action = "sleep 1; hyprctl dispatch exit";
+          text = "Exit";
+          keybind = "e";
         }
         {
-          "label" = "suspend";
-          "action" = "sleep 1; systemctl suspend";
-          "text" = "Suspend";
-          "keybind" = "u";
+          label = "suspend";
+          action = "sleep 1; systemctl suspend";
+          text = "Suspend";
+          keybind = "u";
         }
         {
-          "label" = "lock";
-          "action" = "sleep 1; hyprlock";
-          "text" = "Lock";
-          "keybind" = "l";
+          label = "lock";
+          action = "sleep 1; hyprlock";
+          text = "Lock";
+          keybind = "l";
         }
         {
-          "label" = "hibernate";
-          "action" = "sleep 1; systemctl hibernate";
-          "text" = "Hibernate";
-          "keybind" = "h";
+          label = "hibernate";
+          action = "sleep 1; systemctl hibernate";
+          text = "Hibernate";
+          keybind = "h";
         }
       ];
       style = ''

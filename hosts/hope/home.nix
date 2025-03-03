@@ -64,8 +64,8 @@
   ncfg.rofi.enable = true;
   ncfg.sesh.enable = true;
   ncfg.tmux.enable = true;
+  ncfg.wallpaper.enable = true;
   ncfg.wezterm.enable = true;
-  ncfg.wlogout.enable = true;
   ncfg.zoxide.enable = true;
   ncfg.zsh.enable = true;
 

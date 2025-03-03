@@ -1,6 +1,5 @@
 {
   pkgs,
-  userConfig,
   ...
 }:
 let
@@ -125,10 +124,10 @@ in
   # Environment packages for GPU support
   environment.systemPackages =
     with pkgs;
-    lib.optionals (needsMesa) [
+    lib.optionals needsMesa [
       mesa
     ]
-    ++ lib.optionals (hasAmdGpu) [
+    ++ lib.optionals hasAmdGpu [
       vulkan-tools
       vulkan-loader
       vulkan-validation-layers

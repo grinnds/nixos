@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -28,6 +27,7 @@ in
       initial_session = default_session;
     };
   };
+  services.gnome.gnome-keyring.enable = true;
   security.rtkit.enable = true;
   security.polkit.enable = true;
   security.pam.services.swaylock = {
@@ -35,6 +35,7 @@ in
       auth include login
     '';
   };
+  services.blueman.enable = true;
   xdg = {
     autostart.enable = true;
     portal = {
@@ -56,7 +57,6 @@ in
 
   stylix = {
     enable = true;
-
     image = ./wallpappers/hololive.jpg;
     base16Scheme = {
       base00 = "282936";

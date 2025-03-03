@@ -29,10 +29,7 @@ in
 
         input = {
           kb_layout = "${keyboardLayout}";
-          kb_options = [
-            "grp:win_space_toggle"
-            "caps:ctrl_modifier"
-          ];
+          kb_options = "grp:win_space_toggle,caps:ctrl_modifier";
           repeat_delay = 300;
           follow_mouse = 1;
           sensitivity = 0;

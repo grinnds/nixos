@@ -21,6 +21,15 @@ in
 
   options = {
     ncfg.hyprland.enable = lib.mkEnableOption "Enable hyprland";
+    ncfg.hyprland.monitors =
+      with lib;
+      with types;
+      mkOption {
+        description = "List of monitors in hyprland format";
+        type = listOf str;
+        example = [ "eDP-1, 1920x1080@240, 0x0, 1" ];
+        default = [ ];
+      };
   };
 
   config = lib.mkIf cfg.enable {

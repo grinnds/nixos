@@ -24,7 +24,6 @@ in
           "${pkgs.pyprland}/bin/pypr"
           "${pkgs.hyprpaper}/bin/hyprpaper"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
-          "${pkgs.swaynotificationcenter}/bin/swaync"
         ];
 
         input = {
@@ -41,6 +40,7 @@ in
         };
 
         general = {
+          monitor = cfg.monitors;
           "$modifier" = "SUPER";
           layout = "dwindle";
           gaps_in = 6;

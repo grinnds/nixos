@@ -37,6 +37,7 @@
           yank
           {
             plugin = catppuccin;
+            # TODO: Fix
             extraConfig = ''
               set -g @catppuccin_flavor "mocha"
 
@@ -45,8 +46,8 @@
               set -g @catppuccin_window_middle_separator " █"
               set -g @catppuccin_window_number_position "right"
 
-              set -g @catppuccin_window_default_fill "number"
-              set -g @catppuccin_window_default_text "#W"
+              # set -g @catppuccin_window_default_fill "number"
+              set -g @catppuccin_window_text "#W"
 
               set -g @catppuccin_window_current_fill "number"
               set -g @catppuccin_window_current_text "#W"
@@ -55,14 +56,14 @@
               set -g @catppuccin_status_left_separator  " "
               set -g @catppuccin_status_right_separator ""
               set -g @catppuccin_status_right_separator_inverse "no"
-              set -g @catppuccin_status_fill "icon"
+              # set -g @catppuccin_status_fill "icon"
               set -g @catppuccin_status_connect_separator "no"
 
               set -g @catppuccin_directory_text "#{pane_current_path}"
 
               set -g @catppuccin_date_time_text "%Y-%m-%d %H:%M:%S"
 
-              set -g @catppuccin_window_status_enable "yes"
+              set -g @catppuccin_window_flags "icon"
 
               set -g @catppuccin_icon_window_last "󰖰"
               set -g @catppuccin_icon_window_current "󰖯"
@@ -71,10 +72,6 @@
               set -g @catppuccin_icon_window_silent "󰂛"
               set -g @catppuccin_icon_window_activity "󰖲"
               set -g @catppuccin_icon_window_bell "󰂞"
-
-              # This one is good https://github.com/catppuccin/tmux/discussions/317#discussioncomment-11064512
-              # But I can't male it work, colors not working
-              # Current look is fine
             '';
           }
           # This plugin needs to be loaded before continuum or else continuum, will
@@ -110,7 +107,7 @@
         extraConfig = ''
           # This command is executed to address an edge case where after a fresh install of the OS no resurrect
           # directory exist which means that the continuum plugin will not work. And so without user
-          # manually saving the first session(prfix + Ctrl+s) no resurrect-continuum will occur.
+          # manually saving the first session(prefix + Ctrl+s) no resurrect-continuum will occur.
           #
           # And in case user does not remember to save his work for the first time and tmux daemon gets
           # restarted next time user will try to attach, there will be no state to attach to and user will

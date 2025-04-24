@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  system,
   ...
 }:
 
@@ -30,6 +31,7 @@
     docker-compose
     wireshark
     bitwarden-desktop
+    inputs.nix-alien.packages.${pkgs.system}.nix-alien
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.

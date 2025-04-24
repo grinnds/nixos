@@ -1,5 +1,8 @@
 import = []
 
+[default_session]
+preview_command = "ls -la {}"
+
 [[session]]
 name = "home "
 path = "~"

@@ -7,7 +7,7 @@
 let
   cfg = config.ncfg.hyprland;
   terminal = "wezterm";
-  browser = "brave";
+  browser = "vivaldi";
 in
 {
   config = lib.mkIf cfg.enable {

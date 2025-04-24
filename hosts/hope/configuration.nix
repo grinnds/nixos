@@ -11,6 +11,9 @@
     ./drivers.nix
     inputs.home-manager.nixosModules.default
   ];
+
+  services.hardware.bolt.enable = true;
+
   programs.thunar = {
     enable = true;
     plugins = with pkgs.xfce; [
@@ -18,6 +21,8 @@
       thunar-volman
     ];
   };
+
+  programs.nix-ld.dev.enable = true;
 
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
@@ -73,6 +78,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    vivaldi
     nix-output-monitor
   ];
 

@@ -28,7 +28,7 @@ local on_attach = function(client, bufnr)
 	map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 	map("K", vim.lsp.buf.hover, "Show LSP Hover")
 
-	if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+	if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, bufnr) then
 		local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
 		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 			buffer = bufnr,
@@ -54,14 +54,32 @@ end
 
 local capabilites = require("blink.cmp").get_lsp_capabilities()
 
-if vim.g.have_nerd_font then
-	local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
-	local diagnostic_signs = {}
-	for type, icon in pairs(signs) do
-		diagnostic_signs[vim.diagnostic.severity[type]] = icon
-	end
-	vim.diagnostic.config({ signs = { text = diagnostic_signs } })
-end
+vim.diagnostic.config({
+	severity_sort = true,
+	float = { border = "rounded", source = "if_many" },
+	underline = { severity = vim.diagnostic.severity.ERROR },
+	signs = vim.g.have_nerd_font and {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.INFO] = "󰋽 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
+		},
+	} or {},
+	virtual_text = {
+		source = "if_many",
+		spacing = 2,
+		format = function(diagnostic)
+			local diagnostic_message = {
+				[vim.diagnostic.severity.ERROR] = diagnostic.message,
+				[vim.diagnostic.severity.WARN] = diagnostic.message,
+				[vim.diagnostic.severity.INFO] = diagnostic.message,
+				[vim.diagnostic.severity.HINT] = diagnostic.message,
+			}
+			return diagnostic_message[diagnostic.severity]
+		end,
+	},
+})
 
 lspconfig.nixd.setup({
 	on_attach = on_attach,

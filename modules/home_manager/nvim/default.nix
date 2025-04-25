@@ -57,8 +57,10 @@
           ruff
           jq
           taplo
-          taplo
           codespell
+
+          # linters
+          mypy
 
           # debuggers
           delve
@@ -172,6 +174,10 @@
           {
             plugin = conform-nvim;
             config = toLuaFile ./config/plugin/conform.lua;
+          }
+          {
+            plugin = nvim-lint;
+            config = toLuaFile ./config/plugin/lint.lua;
           }
           {
             plugin = blink-cmp;

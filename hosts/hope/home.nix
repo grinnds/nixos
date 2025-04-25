@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  system,
   ...
 }:
 
@@ -95,10 +94,6 @@
   };
 
   programs.gh = {
-    enable = true;
-  };
-
-  programs.mise = {
     enable = true;
   };
 

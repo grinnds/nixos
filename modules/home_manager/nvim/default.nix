@@ -47,6 +47,7 @@
           marksman
           pyright
           vscode-langservers-extracted # jsonls
+          rust-analyzer
 
           # formatters
           stylua
@@ -58,9 +59,11 @@
           jq
           taplo
           codespell
+          rustfmt
 
           # linters
           mypy
+          clippy
 
           # debuggers
           delve
@@ -158,6 +161,7 @@
                 p.tree-sitter-python
                 p.tree-sitter-json
                 p.tree-sitter-toml
+                p.tree-sitter-rust
               ])
             );
             config = toLuaFile ./config/plugin/treesitter.lua;

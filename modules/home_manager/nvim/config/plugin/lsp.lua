@@ -153,3 +153,8 @@ lspconfig.jsonls.setup({
 	on_attach = on_attach,
 	capabilites = capabilites,
 })
+
+lspconfig.rust_analyzer.setup({
+	on_attach = on_attach,
+	capabilites = capabilites,
+})

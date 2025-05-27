@@ -1,58 +1,63 @@
-local lspconfig = require("lspconfig")
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 
-local on_attach = function(client, bufnr)
-	local map = function(keys, func, desc, mode)
-		mode = mode or "n"
-		vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
-	end
+	callback = function(event)
+		local bufnr = event.buf
 
-	local unmap = function(keys, mode)
-		mode = mode or "n"
-		pcall(vim.keymap.del, mode, keys)
-		-- Old code, testing new one
-		-- vim.keymap.set(mode, keys, "<nop>")
-	end
+		local map = function(keys, func, desc, mode)
+			mode = mode or "n"
+			vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+		end
 
-	map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-	map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-	unmap("grr")
-	map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-	unmap("gri")
-	map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-	map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-	map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-	map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-	unmap("grn")
-	map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
-	unmap("gra")
-	map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-	map("K", vim.lsp.buf.hover, "Show LSP Hover")
+		local unmap = function(keys, mode)
+			mode = mode or "n"
+			pcall(vim.keymap.del, mode, keys)
+			-- Old code, testing new one
+			-- vim.keymap.set(mode, keys, "<nop>")
+		end
 
-	if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, bufnr) then
-		local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-			buffer = bufnr,
-			group = highlight_augroup,
-			callback = vim.lsp.buf.document_highlight,
-		})
+		map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+		map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+		unmap("grr")
+		map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+		unmap("gri")
+		map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+		map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+		map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+		map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+		unmap("grn")
+		map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+		unmap("gra")
+		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+		map("K", vim.lsp.buf.hover, "Show LSP Hover")
 
-		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-			buffer = bufnr,
-			group = highlight_augroup,
-			callback = vim.lsp.buf.clear_references,
-		})
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, bufnr) then
+			local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+				buffer = bufnr,
+				group = highlight_augroup,
+				callback = vim.lsp.buf.document_highlight,
+			})
 
-		vim.api.nvim_create_autocmd("LspDetach", {
-			group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
-			callback = function(event)
-				vim.lsp.buf.clear_references()
-				vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event.buf })
-			end,
-		})
-	end
-end
+			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+				buffer = bufnr,
+				group = highlight_augroup,
+				callback = vim.lsp.buf.clear_references,
+			})
 
-local capabilites = require("blink.cmp").get_lsp_capabilities()
+			vim.api.nvim_create_autocmd("LspDetach", {
+				group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+				callback = function(event)
+					vim.lsp.buf.clear_references()
+					vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event.buf })
+				end,
+			})
+		end
+	end,
+})
+
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 vim.diagnostic.config({
 	severity_sort = true,
@@ -81,80 +86,62 @@ vim.diagnostic.config({
 	},
 })
 
-lspconfig.nixd.setup({
-	on_attach = on_attach,
-	capabalities = capabilites,
-	settings = {
-		nixd = {
-			nixpkgs = {
-				expr = "import <nixpkgs> { }",
+local servers = {
+	nixd = {
+		settings = {
+			nixd = {
+				nixpkgs = {
+					expr = "import <nixpkgs> { }",
+				},
+				formatting = {
+					command = { "nixfmt" },
+				},
+				-- TODO: make it work
+				-- options = {
+				-- 	nixos = {
+				-- 		expr = '(builtins.getFlake ("/etc/nixos/")).nixosConfigurations.hope.options',
+				-- 	},
+				-- },
 			},
-			formatting = {
-				command = { "nixfmt" },
-			},
-			-- TODO: make it work
-			-- options = {
-			-- 	nixos = {
-			-- 		expr = '(builtins.getFlake ("/etc/nixos/")).nixosConfigurations.hope.options',
-			-- 	},
-			-- },
 		},
 	},
-})
+	lua_ls = {
+		settings = {
+			Lua = {
+				completion = {
+					callSnippet = "Replace",
+				},
+				diagnostics = { disable = { "missing-fields" } },
+			},
+		},
+	},
+	gopls = {
+		settings = {
+			gopls = {
+				completeUnimported = true,
+				usePlaceholders = true,
+				analyses = {
+					unusedparams = true,
+				},
+			},
+		},
+	},
+	marksman = {},
+	pyright = {},
+	ruff = {},
+	jsonls = {},
+	rust_analyzer = {},
+	ts_ls = {},
+}
 
 require("lazydev").setup({
 	library = {
 		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 	},
 })
-lspconfig.lua_ls.setup({
-	on_attach = on_attach,
-	capabalities = capabilites,
-	settings = {
-		Lua = {
-			completion = {
-				callSnippet = "Replace",
-			},
-			diagnostics = { disable = { "missing-fields" } },
-		},
-	},
-})
 
-lspconfig.gopls.setup({
-	on_attach = on_attach,
-	capabilites = capabilites,
-	settings = {
-		gopls = {
-			completeUnimported = true,
-			usePlaceholders = true,
-			analyses = {
-				unusedparams = true,
-			},
-		},
-	},
-})
-
-lspconfig.marksman.setup({
-	on_attach = on_attach,
-	capabilites = capabilites,
-})
-
-lspconfig.pyright.setup({
-	on_attach = on_attach,
-	capabilites = capabilites,
-})
-
-lspconfig.ruff.setup({
-	on_attach = on_attach,
-	capabilites = capabilites,
-})
-
-lspconfig.jsonls.setup({
-	on_attach = on_attach,
-	capabilites = capabilites,
-})
-
-lspconfig.rust_analyzer.setup({
-	on_attach = on_attach,
-	capabilites = capabilites,
-})
+for server, cfg in pairs(servers) do
+	cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
+	vim.lsp.enable(server)
+	vim.lsp.config(server, cfg)
+end

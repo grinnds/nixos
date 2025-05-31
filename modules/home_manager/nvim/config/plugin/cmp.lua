@@ -121,7 +121,6 @@ require("blink.cmp").setup({
 
 	cmdline = {
 		completion = {
-			keymap = { preset = "inherit" },
 			menu = {
 				auto_show = true,
 			},

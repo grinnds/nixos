@@ -130,7 +130,18 @@ local servers = {
 	pyright = {},
 	ruff = {},
 	jsonls = {},
-	rust_analyzer = {},
+	rust_analyzer = {
+		settings = {
+			["rust-analyzer"] = {
+				procMacro = { enable = true },
+				cargo = { allFeatures = true },
+				checkOnSave = {
+					command = "clippy",
+					extraArgs = { "--no-deps" },
+				},
+			},
+		},
+	},
 	ts_ls = {},
 }
 

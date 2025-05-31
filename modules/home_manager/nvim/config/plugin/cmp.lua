@@ -69,28 +69,34 @@ require("blink.cmp").setup({
 				-- After accepting the completion, delete the trigger_text characters
 				-- from the final inserted text
 				transform_items = function(_, items)
+					local line = vim.api.nvim_get_current_line()
 					local col = vim.api.nvim_win_get_cursor(0)[2]
-					local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-					local trigger_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
-					if trigger_pos then
+					local before_cursor = line:sub(1, col)
+					local start_pos, end_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
+					if start_pos and end_pos then
 						for _, item in ipairs(items) do
-							item.textEdit = {
-								newText = item.insertText or item.label,
-								range = {
-									start = { line = vim.fn.line(".") - 1, character = trigger_pos - 1 },
-									["end"] = { line = vim.fn.line(".") - 1, character = col },
-								},
-							}
+							if not item.trigger_text_modified then
+								---@diagnostic disable-next-line: inject-field
+								item.trigger_text_modified = true
+								item.textEdit = {
+									newText = item.insertText or item.label,
+									range = {
+										start = { line = vim.fn.line(".") - 1, character = start_pos - 1 },
+										["end"] = { line = vim.fn.line(".") - 1, character = end_pos },
+									},
+								}
+							end
 						end
 					end
-					-- NOTE: After the transformation, I have to reload the luasnip source
-					-- Otherwise really crazy shit happens and I spent way too much time
-					-- figurig this out
-					vim.schedule(function()
-						require("blink.cmp").reload("snippets")
-					end)
 					return items
 				end,
+			},
+			buffer = {
+				name = "Buffer",
+				enabled = true,
+				max_items = 5,
+				module = "blink.cmp.sources.buffer",
+				score_offset = 14,
 			},
 			lazydev = {
 				name = "LazyDev",
@@ -102,6 +108,8 @@ require("blink.cmp").setup({
 				module = "blink-emoji",
 				name = "Emoji",
 				score_offset = 15,
+				max_items = 5,
+				min_keyword_length = 2,
 			},
 			markdown = {
 				name = "RenderMarkdown",
@@ -113,6 +121,7 @@ require("blink.cmp").setup({
 
 	cmdline = {
 		completion = {
+			keymap = { preset = "inherit" },
 			menu = {
 				auto_show = true,
 			},

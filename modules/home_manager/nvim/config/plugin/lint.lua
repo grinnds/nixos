@@ -2,7 +2,6 @@ local lint = require("lint")
 
 lint.linters_by_ft = {
 	python = { "mypy" },
-	rust = { "clippy" },
 	typescript = { "eslint_d" },
 }
 

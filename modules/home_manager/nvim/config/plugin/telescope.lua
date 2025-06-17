@@ -32,8 +32,6 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 vim.keymap.set("n", "<leader>fb", builtin.buffers)
 vim.keymap.set("n", "<leader>fs", builtin.live_grep)
 vim.keymap.set("n", "<leader>fd", builtin.diagnostics)
-vim.keymap.set("n", "<leader>ec", function()
-	require("telescope.builtin").find_files({
-		cwd = "/etc/nixos/",
-	})
-end)
+vim.keymap.set("n", "<leader>/", function()
+	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown())
+end, { desc = "[/] Fuzzily search in current buffer" })

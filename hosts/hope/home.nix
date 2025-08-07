@@ -9,25 +9,6 @@
     inputs.self.outputs.homeManagerModules.default
   ];
 
-  nixpkgs.overlays = [
-    (self: super: {
-      vivaldi =
-        (super.vivaldi.overrideAttrs (oldAttrs: {
-          dontWrapQtApps = false;
-          dontPatchELF = true;
-          nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.kdePackages.wrapQtAppsHook ];
-        })).override
-          {
-            commandLineArgs = ''
-              --enable-features=UseOzonePlatform
-              --ozone-platform=wayland
-              --ozone-platform-hint=auto
-              --enable-features=WaylandWindowDecorations
-            '';
-          };
-    })
-  ];
-
   home.username = "baris";
   home.homeDirectory = "/home/baris";
   home.keyboard = null;

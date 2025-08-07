@@ -135,7 +135,7 @@ local servers = {
 			["rust-analyzer"] = {
 				procMacro = { enable = true },
 				cargo = { allFeatures = true },
-				checkOnSave = {
+				check = {
 					command = "clippy",
 					extraArgs = { "--no-deps" },
 				},

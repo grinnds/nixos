@@ -137,6 +137,9 @@
           unbind z
           bind-key f resize-pane -Z
 
+          unbind l
+          bind-key C-a last-window
+
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi V send-keys -X select-line
           bind-key -T copy-mode-vi C-v run-shell "tmux send-keys -X rectangle-toggle; tmux send-keys -X begin-selection"

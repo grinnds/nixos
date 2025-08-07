@@ -13,6 +13,8 @@ in
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       bind = [
+        "$modifier,Print,exec,${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.wl-clipboard}/bin/wl-copy && ${pkgs.wl-clipboard}/bin/wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | ${pkgs.dunst}/bin/dunstify \"Screenshot of the region taken\" -t 1000"
+        "$modifier SHIFT,Print,exec,${pkgs.grim}/bin/grim - | ${pkgs.wl-clipboard}/bin/wl-copy && ${pkgs.wl-clipboard}/bin/wl-paste > ~/Pictures/Screenshots/Screenshot-$(date +%F_%T).png | ${pkgs.dunst}/bin/dunstify \"Screenshot of whole screen taken\" -t 1000"
         "$modifier,Return,exec,${terminal}"
         "$modifier SHIFT,Return,exec,rofi-launcher"
         "$modifier,W,exec,${browser}"

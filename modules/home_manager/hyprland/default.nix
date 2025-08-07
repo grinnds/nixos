@@ -17,6 +17,7 @@ in
     ./pyprland.nix
     ./waybar.nix
     ./wlogout.nix
+    ./dunst.nix
   ];
 
   options = {

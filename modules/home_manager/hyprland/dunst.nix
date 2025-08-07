@@ -39,7 +39,8 @@ in
           frame_width = 1;
           frame_color = "#ffffff";
           gap_size = 0;
-          separator_color = "frame";
+          # TODO: WTF?
+          # separator_color = "frame";
           sort = "yes";
         };
       };

@@ -136,6 +136,12 @@
             config = toLuaFile ./config/plugin/telescope.lua;
           }
 
+          # ai
+          {
+            plugin = avante-nvim;
+            config = toLuaFile ./config/plugin/avante.lua;
+          }
+
           # debug
           {
             plugin = nvim-dap;

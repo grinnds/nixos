@@ -6,6 +6,7 @@
     ./nvim
     ./rofi
     ./sesh
+    ./sops
     ./tmux
     ./wallpapers
     ./wezterm

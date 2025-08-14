@@ -26,6 +26,8 @@
       };
 
       initContent = ''
+        export OPENROUTER_API_KEY=$(cat ${config.sops.secrets.openrouter_api_key.path})
+
         bindkey "^y" autosuggest-accept
         bindkey "^n" history-search-forward
         bindkey "^p" history-search-backward
@@ -41,7 +43,6 @@
         zstyle ":completion:*" menu no 
         zstyle ":fzf-tab:complete:cd:*" fzf-preview 'ls --color $realpath'
       '';
-
       plugins = with pkgs; [
         {
           name = zsh-powerlevel10k.pname;

@@ -9,6 +9,7 @@
     ./tmux
     ./wallpapers
     ./wezterm
+    ./yazi
     ./zoxide
     ./zsh
   ];

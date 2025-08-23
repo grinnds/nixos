@@ -141,6 +141,7 @@
             plugin = avante-nvim;
             config = toLuaFile ./config/plugin/avante.lua;
           }
+          nui-nvim
 
           # debug
           {

@@ -4,13 +4,22 @@ require("avante").setup({
 	behaviour = {
 		use_cwd_as_project_root = true,
 	},
-	provider = "openrouter",
+	provider = "ollama",
 	providers = {
 		openrouter = {
 			__inherited_from = "openai",
 			endpoint = "https://openrouter.ai/api/v1",
 			api_key_name = "OPENROUTER_API_KEY",
 			model = "deepseek/deepseek-chat-v3-0324:free",
+		},
+		ollama = {
+			endpoint = "http://127.0.0.1:11434",
+			model = "llama3.2:3b",
+			extra_request_body = {
+				-- options = {
+				-- 	num_ctx = 16384,
+				-- },
+			},
 		},
 	},
 	-- openai = {

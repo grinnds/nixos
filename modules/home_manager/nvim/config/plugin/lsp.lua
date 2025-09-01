@@ -12,8 +12,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local unmap = function(keys, mode)
 			mode = mode or "n"
 			pcall(vim.keymap.del, mode, keys)
-			-- Old code, testing new one
-			-- vim.keymap.set(mode, keys, "<nop>")
 		end
 
 		map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
@@ -127,7 +125,24 @@ local servers = {
 		},
 	},
 	marksman = {},
-	basedpyright = {},
+	basedpyright = {
+		settings = {
+			basedpyright = {
+				disableOrganizeImports = true,
+				analysis = {
+					-- Ignore all files for analysis to exclusively use Ruff for linting
+					-- ignore = { "*" },
+				},
+			},
+		},
+		capabilities = {
+			workspace = {
+				didChangeWatchedFiles = {
+					dynamicRegistration = true,
+				},
+			},
+		},
+	},
 	ruff = {},
 	jsonls = {},
 	rust_analyzer = {

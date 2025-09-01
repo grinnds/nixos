@@ -49,6 +49,7 @@
           vscode-langservers-extracted # jsonls
           rust-analyzer
           typescript-language-server
+          inotify-tools # better file watching
 
           # formatters
           stylua

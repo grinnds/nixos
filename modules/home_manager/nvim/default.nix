@@ -45,7 +45,7 @@
           lua-language-server
           gopls
           marksman
-          pyright
+          basedpyright
           vscode-langservers-extracted # jsonls
           rust-analyzer
           typescript-language-server
@@ -56,13 +56,13 @@
           gotools
           golines
           nodePackages.prettier
-          ruff
           jq
           taplo
           codespell
           rustfmt
 
           # linters
+          ruff
           mypy
           clippy
           eslint_d

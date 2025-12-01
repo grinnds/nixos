@@ -24,13 +24,13 @@
 
   home.packages = with pkgs; [
     brave
-    nekoray
+    throne
     telegram-desktop
     docker
     docker-compose
     wireshark
     bitwarden-desktop
-    inputs.nix-alien.packages.${pkgs.system}.nix-alien
+    inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}.nix-alien
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -82,14 +82,14 @@
 
   programs.git = {
     enable = true;
-    aliases = {
-      ci = "commit";
-      co = "checkout";
-      s = "status";
-    };
-    userName = "grinnds";
-    userEmail = "40234162+grinnds@users.noreply.github.com";
-    extraConfig = {
+    settings = {
+      aliases = {
+        ci = "commit";
+        co = "checkout";
+        s = "status";
+      };
+      user.name = "grinnds";
+      user.email = "40234162+grinnds@users.noreply.github.com";
       push.autoSetupRemote = true;
       init.defaultBranch = "main";
     };

@@ -18,8 +18,6 @@
 
     programs.neovim =
       let
-        toLua = str: "lua << EOF\n${str}\nEOF\n";
-        toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
         python = pkgs.python313.withPackages (p: [
           p.debugpy
         ]);
@@ -55,7 +53,7 @@
 
           # formatters
           stylua
-          nixfmt-rfc-style
+          nixfmt
           gotools
           golines
           nodePackages.prettier
@@ -93,7 +91,8 @@
               installPhase = "cp -r $src $out";
               dontUnpack = true;
             };
-            config = toLua ''
+            type = "lua";
+            config = ''
               vim.g.mapleader = ' ' 
               vim.g.maplocalleader = ' ' 
 
@@ -104,32 +103,38 @@
           # theming
           {
             plugin = catppuccin-nvim;
-            config = toLuaFile ./config/plugin/catppuccin.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/catppuccin.lua;
           }
 
           # quality of life
           {
             plugin = mini-nvim;
-            config = toLuaFile ./config/plugin/mini.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/mini.lua;
           }
           vim-sleuth
           {
             plugin = gitsigns-nvim;
-            config = toLuaFile ./config/plugin/gitsigns.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/gitsigns.lua;
           }
           {
             plugin = vim-tmux-navigator;
-            config = toLuaFile ./config/plugin/tmux.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/tmux.lua;
           }
           {
             plugin = render-markdown-nvim;
-            config = toLua "require('render-markdown').setup({})";
+            type = "lua";
+            config = "require('render-markdown').setup({})";
           }
 
           # file management
           {
             plugin = oil-nvim;
-            config = toLuaFile ./config/plugin/oil.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/oil.lua;
           }
 
           plenary-nvim
@@ -137,27 +142,23 @@
           telescope-fzf-native-nvim
           {
             plugin = telescope-nvim;
-            config = toLuaFile ./config/plugin/telescope.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/telescope.lua;
           }
-
-          # ai
-          {
-            plugin = avante-nvim;
-            config = toLuaFile ./config/plugin/avante.lua;
-          }
-          nui-nvim
 
           # debug
           {
             plugin = nvim-dap;
-            config = toLuaFile ./config/plugin/debug.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/debug.lua;
           }
           nvim-dap-ui
           nvim-nio
           nvim-dap-go
           {
             plugin = nvim-dap-python;
-            config = toLua ''require("dap-python").setup("${python}/bin/python")'';
+            type = "lua";
+            config = ''require("dap-python").setup("${python}/bin/python")'';
           }
 
           # code quality
@@ -188,39 +189,41 @@
                 p.tree-sitter-svelte
               ])
             );
-            config = toLuaFile ./config/plugin/treesitter.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/treesitter.lua;
           }
           {
             plugin = nvim-treesitter-context;
-            config = toLua ''require("treesitter-context").setup({multiline_threshold=1})'';
+            type = "lua";
+            config = ''require("treesitter-context").setup({multiline_threshold=1})'';
           }
           lazydev-nvim
           {
             plugin = nvim-lspconfig;
-            config = toLuaFile ./config/plugin/lsp.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/lsp.lua;
           }
           {
             plugin = conform-nvim;
-            config = toLuaFile ./config/plugin/conform.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/conform.lua;
           }
           {
             plugin = nvim-lint;
-            config = toLuaFile ./config/plugin/lint.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/lint.lua;
           }
           {
             plugin = blink-cmp;
-            config = toLuaFile ./config/plugin/cmp.lua;
+            type = "lua";
+            config = builtins.readFile ./config/plugin/cmp.lua;
           }
           vim-dadbod
           vim-dadbod-completion
-          {
-            plugin = luasnip;
-            config = toLuaFile ./config/plugin/luasnip.lua;
-          }
           blink-emoji-nvim
         ];
 
-        extraLuaConfig = ''${builtins.readFile ./config/options.lua}'';
+        initLua = "${builtins.readFile ./config/options.lua}";
       };
   };
 }

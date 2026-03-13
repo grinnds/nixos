@@ -17,24 +17,8 @@ require("blink.cmp").setup({
 		return true
 	end,
 
-	snippets = {
-		preset = "luasnip",
-		expand = function(snippet)
-			require("luasnip").lsp_expand(snippet)
-		end,
-		active = function(filter)
-			if filter and filter.direction then
-				return require("luasnip").jumpable(filter.direction)
-			end
-			return require("luasnip").in_snippet()
-		end,
-		jump = function(direction)
-			require("luasnip").jump(direction)
-		end,
-	},
-
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer", "lazydev", "emoji", "markdown" },
+		default = { "lsp", "path", "buffer", "dadbod", "lazydev", "emoji", "markdown" },
 		providers = {
 			lsp = {
 				name = "LSP",
@@ -53,50 +37,20 @@ require("blink.cmp").setup({
 					show_hidden_files_by_default = true,
 				},
 			},
-			snippets = {
-				name = "Snippets",
-				module = "blink.cmp.sources.snippets",
-				enabled = true,
-				score_offset = 85,
-				max_items = 8,
-				min_keyword_length = 2,
-				should_show_items = function()
-					local col = vim.api.nvim_win_get_cursor(0)[2]
-					local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-					-- NOTE: remember that `trigger_text` is modified at the top of the file
-					return before_cursor:match(trigger_text .. "%w*$") ~= nil
-				end,
-				-- After accepting the completion, delete the trigger_text characters
-				-- from the final inserted text
-				transform_items = function(_, items)
-					local line = vim.api.nvim_get_current_line()
-					local col = vim.api.nvim_win_get_cursor(0)[2]
-					local before_cursor = line:sub(1, col)
-					local start_pos, end_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
-					if start_pos and end_pos then
-						for _, item in ipairs(items) do
-							if not item.trigger_text_modified then
-								---@diagnostic disable-next-line: inject-field
-								item.trigger_text_modified = true
-								item.textEdit = {
-									newText = item.insertText or item.label,
-									range = {
-										start = { line = vim.fn.line(".") - 1, character = start_pos - 1 },
-										["end"] = { line = vim.fn.line(".") - 1, character = end_pos },
-									},
-								}
-							end
-						end
-					end
-					return items
-				end,
-			},
 			buffer = {
 				name = "Buffer",
 				enabled = true,
 				max_items = 5,
 				module = "blink.cmp.sources.buffer",
 				score_offset = 14,
+			},
+			-- Example on how to configure dadbod found in the main repo
+			-- https://github.com/kristijanhusak/vim-dadbod-completion
+			dadbod = {
+				name = "Dadbod",
+				module = "vim_dadbod_completion.blink",
+				min_keyword_length = 2,
+				score_offset = 85,
 			},
 			lazydev = {
 				name = "LazyDev",

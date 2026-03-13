@@ -12,6 +12,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.yazi.enable = true;
+    programs.yazi = {
+      enable = true;
+      settings = {
+        mgr = {
+          show_hidden = true;
+        };
+      };
+    };
   };
 }

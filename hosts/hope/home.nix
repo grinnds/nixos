@@ -51,6 +51,9 @@
   ];
 
   stylix.targets = {
+    opencode.enable = true;
+    lazygit.enable = true;
+    yazi.enable = true;
     waybar.enable = false;
     rofi.enable = false;
     hyprland.enable = false;
@@ -78,6 +81,8 @@
   # autoForwardBranches
   programs.lazygit.enable = true;
 
+  programs.codex.enable = true;
+
   programs.bat.enable = true;
 
   programs.git = {
@@ -90,7 +95,10 @@
       };
       user.name = "grinnds";
       user.email = "40234162+grinnds@users.noreply.github.com";
+      pull.rebase = true;
       push.autoSetupRemote = true;
+      merge.conflictStyle = "diff3";
+      commit.verbose = true;
       init.defaultBranch = "main";
     };
   };

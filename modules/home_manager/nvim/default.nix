@@ -49,6 +49,8 @@
           vscode-langservers-extracted # jsonls
           rust-analyzer
           typescript-language-server
+          svelte-language-server
+          tailwindcss-language-server
           inotify-tools # better file watching
 
           # formatters
@@ -75,6 +77,7 @@
           # tools
           gcc
           go
+          postgresql_18
         ];
 
         plugins = with pkgs.vimPlugins; [
@@ -162,17 +165,27 @@
             plugin = (
               nvim-treesitter.withPlugins (p: [
                 p.tree-sitter-nix
+
                 p.tree-sitter-vim
                 p.tree-sitter-vimdoc
+
                 p.tree-sitter-lua
                 p.tree-sitter-go
+                p.tree-sitter-python
+                p.tree-sitter-rust
+
+                p.tree-sitter-make
                 p.tree-sitter-markdown
                 p.tree-sitter-markdown-inline
-                p.tree-sitter-python
+                p.tree-sitter-sql
+
                 p.tree-sitter-json
                 p.tree-sitter-toml
-                p.tree-sitter-rust
+
                 p.tree-sitter-typescript
+                p.tree-sitter-javascript
+                p.tree-sitter-css
+                p.tree-sitter-svelte
               ])
             );
             config = toLuaFile ./config/plugin/treesitter.lua;
@@ -198,6 +211,8 @@
             plugin = blink-cmp;
             config = toLuaFile ./config/plugin/cmp.lua;
           }
+          vim-dadbod
+          vim-dadbod-completion
           {
             plugin = luasnip;
             config = toLuaFile ./config/plugin/luasnip.lua;

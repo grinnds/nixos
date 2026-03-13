@@ -158,6 +158,8 @@ local servers = {
 		},
 	},
 	ts_ls = {},
+	tailwindcss = {},
+	svelte = {},
 }
 
 require("lazydev").setup({

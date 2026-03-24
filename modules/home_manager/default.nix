@@ -4,6 +4,7 @@
     ./hyprland
     ./lsd
     ./nvim
+    ./ripgrep
     ./rofi
     ./sesh
     ./sops

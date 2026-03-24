@@ -68,6 +68,7 @@
   };
   ncfg.lsd.enable = true;
   ncfg.nvim.enable = true;
+  ncfg.ripgrep.enable = true;
   ncfg.rofi.enable = true;
   ncfg.sesh.enable = true;
   ncfg.tmux.enable = true;

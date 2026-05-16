@@ -12,7 +12,7 @@
 
   config = lib.mkIf config.ncfg.zsh.enable {
     programs.fzf = lib.mkIf config.ncfg.fzf.enable {
-      enableZshIntegration = true;
+      enableZshIntegration = false;
     };
 
     programs.zsh = {
@@ -27,6 +27,8 @@
 
       initContent = ''
         export OPENROUTER_API_KEY=$(cat ${config.sops.secrets.openrouter_api_key.path})
+
+        ${lib.strings.optionalString config.ncfg.fzf.enable "zvm_after_init_commands+=(eval \"$(${pkgs.fzf}/bin/fzf --zsh)\")"}
 
         bindkey "^y" autosuggest-accept
         bindkey "^n" history-search-forward
@@ -81,6 +83,10 @@
           name = zsh-fzf-tab.pname;
           src = zsh-fzf-tab.src;
           file = "fzf-tab.plugin.zsh";
+        }
+        {
+          name = zsh-vi-mode.pname;
+          src = zsh-vi-mode.src;
         }
       ];
     };

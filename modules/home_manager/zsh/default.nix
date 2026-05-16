@@ -28,6 +28,9 @@
       initContent = ''
         export OPENROUTER_API_KEY=$(cat ${config.sops.secrets.openrouter_api_key.path})
 
+        # Disable insert style for cursor
+        ZVM_CURSOR_STYLE_ENABLED=false
+
         ${lib.strings.optionalString config.ncfg.fzf.enable "zvm_after_init_commands+=(eval \"$(${pkgs.fzf}/bin/fzf --zsh)\")"}
 
         bindkey "^y" autosuggest-accept

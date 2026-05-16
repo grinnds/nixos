@@ -80,6 +80,7 @@
   environment.systemPackages = with pkgs; [
     vivaldi
     nix-output-monitor
+    ida-pro
   ];
 
   programs.nh = {

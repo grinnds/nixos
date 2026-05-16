@@ -49,6 +49,13 @@
       nixosConfigurations.hope = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
+          {
+            nixpkgs.overlays = [
+              (final: prev: {
+                ida-pro = prev.callPackage ./pkgs/ida93 { };
+              })
+            ];
+          }
           ./hosts/hope/configuration.nix
           ./modules/nixos
           inputs.nix-ld.nixosModules.nix-ld

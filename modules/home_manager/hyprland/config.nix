@@ -12,6 +12,8 @@ in
     wayland.windowManager.hyprland = {
       enable = true;
 
+      configType = "hyprlang";
+
       systemd.enable = true;
       systemd.enableXdgAutostart = true;
       xwayland.enable = true;
@@ -43,7 +45,7 @@ in
 
         general = {
           monitor = cfg.monitors;
-          layout = "dwindle";
+          layout = "scrolling";
           gaps_in = 6;
           gaps_out = 8;
           border_size = 2;
@@ -59,11 +61,6 @@ in
           force_default_wallpaper = 0;
           mouse_move_enables_dpms = true;
           key_press_enables_dpms = false;
-        };
-
-        dwindle = {
-          pseudotile = true;
-          preserve_split = true;
         };
 
         decoration = {

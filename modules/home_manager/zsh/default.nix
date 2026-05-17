@@ -28,15 +28,6 @@
       initContent = ''
         export OPENROUTER_API_KEY=$(cat ${config.sops.secrets.openrouter_api_key.path})
 
-        # Disable insert style for cursor
-        ZVM_CURSOR_STYLE_ENABLED=false
-
-        ${lib.strings.optionalString config.ncfg.fzf.enable "zvm_after_init_commands+=(eval \"$(${pkgs.fzf}/bin/fzf --zsh)\")"}
-
-        bindkey "^y" autosuggest-accept
-        bindkey "^n" history-search-forward
-        bindkey "^p" history-search-backward
-
         # https://unix.stackexchange.com/questions/722697/how-to-stop-ctrlleft-right-arrow-from-erasing-symbols-in-vi-mode-in-zsh
         bindkey -M vicmd "^[[1;5C" emacs-forward-word
         bindkey -M vicmd "^[[1;5D" emacs-backward-word
@@ -86,6 +77,21 @@
           name = zsh-fzf-tab.pname;
           src = zsh-fzf-tab.src;
           file = "fzf-tab.plugin.zsh";
+        }
+        {
+          name = "zsh-vi-mode-config";
+          src = pkgs.writeTextDir "zsh-vi-mode-config.plugin.zsh" ''
+            # Disable insert style for cursor
+            ZVM_CURSOR_STYLE_ENABLED=false
+
+            zvm_after_init_commands+=(
+              'bindkey -M viins "^y" autosuggest-accept'
+              'bindkey -M viins "^n" history-search-forward'
+              'bindkey -M viins "^p" history-search-backward'
+              ${lib.strings.optionalString config.ncfg.fzf.enable "'eval \"$(${pkgs.fzf}/bin/fzf --zsh)\"'"}
+            )
+          '';
+          file = "zsh-vi-mode-config.plugin.zsh";
         }
         {
           name = zsh-vi-mode.pname;

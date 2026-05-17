@@ -25,7 +25,6 @@ in
         "$modifier,Q,killactive,"
         "$modifier,P,exec,pypr toggle volume"
         "$modifier SHIFT,P,pseudo,"
-        "$modifier SHIFT,I,togglesplit,"
         "$modifier,F,fullscreen,"
         "$modifier SHIFT,F,togglefloating,"
         "$modifier SHIFT,C,exit,"

@@ -56,7 +56,7 @@
           nixfmt
           gotools
           golines
-          nodePackages.prettier
+          prettier
           jq
           taplo
           codespell

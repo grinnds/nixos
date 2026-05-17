@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-
     nix-alien = {
       url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,7 +59,6 @@
           ./hosts/hope/configuration.nix
           ./modules/nixos
           inputs.nix-ld.nixosModules.nix-ld
-          inputs.determinate.nixosModules.default
         ];
       };
 

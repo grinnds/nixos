@@ -88,6 +88,7 @@
               'bindkey -M viins "^y" autosuggest-accept'
               'bindkey -M viins "^n" history-search-forward'
               'bindkey -M viins "^p" history-search-backward'
+              'bindkey -M viins "^w" vi-backward-kill-word'
               ${lib.strings.optionalString config.ncfg.fzf.enable "'eval \"$(${pkgs.fzf}/bin/fzf --zsh)\"'"}
             )
           '';

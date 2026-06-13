@@ -13,6 +13,6 @@ in
 
   config = lib.mkIf cfg.enable {
     home.file."Pictures/Wallpapers/hololive.jpg".source = ./hololive.jpg;
-    home.file.".config/face.jpg".source = ./face.jpg;
+    home.file.".face".source = ./face.jpg;
   };
 }

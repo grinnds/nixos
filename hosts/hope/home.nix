@@ -61,11 +61,9 @@
     neovim.enable = false;
   };
 
+  gtk.gtk4.theme = null;
+
   ncfg.fzf.enable = true;
-  ncfg.hyprland = {
-    enable = true;
-    monitors = [ "eDP-1, 1920x1080@240, 0x0, 1.25" ];
-  };
   ncfg.lsd.enable = true;
   ncfg.nvim.enable = true;
   ncfg.ripgrep.enable = true;

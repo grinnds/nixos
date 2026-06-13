@@ -34,7 +34,7 @@
     };
   };
 
-  ncfg.desktop.hyprland.enable = true;
+  ncfg.desktop.niri.enable = true;
   ncfg.hardware.audio.enable = true;
   ncfg.hardware.bluetooth.enable = true;
   ncfg.stylix.enable = true;

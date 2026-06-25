@@ -20,5 +20,6 @@
       "nvidia-settings"
       "vivaldi"
       "ida-pro"
+      "ida-pro_93_x64linux.run"
     ];
 }

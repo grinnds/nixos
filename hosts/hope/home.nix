@@ -29,7 +29,6 @@
     docker
     docker-compose
     wireshark
-    bitwarden-desktop
     inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}.nix-alien
 
     # # Adds the 'hello' command to your environment. It prints a friendly
@@ -61,7 +60,7 @@
     neovim.enable = false;
   };
 
-  gtk.gtk4.theme = null;
+  # gtk.gtk4.theme = null;
 
   ncfg.fzf.enable = true;
   ncfg.lsd.enable = true;

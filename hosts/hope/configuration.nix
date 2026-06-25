@@ -45,6 +45,7 @@
   networking = {
     hostName = "hope";
     networkmanager.enable = true;
+    firewall.enable = false;
   };
   programs.nm-applet.enable = true;
 

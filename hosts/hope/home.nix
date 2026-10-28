@@ -29,7 +29,9 @@
     docker
     docker-compose
     wireshark
-    inputs.nix-alien.packages.${pkgs.stdenv.hostPlatform.system}.nix-alien
+    jq
+    xh
+    imhex
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.

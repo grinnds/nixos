@@ -22,8 +22,6 @@
     ];
   };
 
-  programs.nix-ld.dev.enable = true;
-
   nix = {
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings = {

@@ -25,16 +25,34 @@ in
 
     programs.niri =
       let
-        noctalia = inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
-          inherit pkgs;
-          settings = (builtins.fromJSON (builtins.readFile ./noctalia.json)).settings;
-        };
+        noctalia = inputs.wrapper-modules.lib.evalPackage [
+          { inherit pkgs; }
+          (
+            {
+              config,
+              pkgs,
+              lib,
+              wlib,
+              ...
+            }:
+            {
+              imports = [ wlib.modules.default ];
+              package = pkgs.noctalia;
+              env = {
+                NOCTALIA_CONFIG_HOME = lib.dirOf (lib.dirOf config.constructFiles.userConfig.path);
+              };
+              constructFiles.userConfig = {
+                relPath = "${config.binName}/noctalia/config.toml";
+                content = builtins.readFile ./noctalia.toml;
+              };
+            }
+          )
+        ];
         noctalia-cmd =
           cmd:
           [
             (lib.getExe noctalia)
-            "ipc"
-            "call"
+            "msg"
           ]
           ++ cmd;
       in
@@ -66,14 +84,12 @@ in
             };
 
             binds = {
-              "Print".screenshot-screen = _: {
-                props = {
-                  write-to-disk = false;
-                };
-              };
+              "Print".spawn = noctalia-cmd [
+                "screenshot-region"
+              ];
 
               "Mod+Backspace".spawn = noctalia-cmd [
-                "lockScreen"
+                "session"
                 "lock"
               ];
 
@@ -86,8 +102,8 @@ in
                 };
               };
               "Mod+Shift+Return".spawn = noctalia-cmd [
+                "panel-toggle"
                 "launcher"
-                "toggle"
               ];
               "Mod+O" = _: {
                 props = [
